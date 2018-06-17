@@ -100,3 +100,25 @@ do {
     alert(`Неверный пароль, у вас осталось ${attempts} попыток`);
   }
 } while (true);
+
+// ВЕРСИЯ 2
+
+const passwords1 = ['qwerty', '111qwe', '123123', 'r4nd0mp4zzw0rd'];
+let attempts1 = 3;
+
+do {
+  const userPassword1 = prompt('Введите свой пароль');
+  attempts1 -= 1;
+
+  if (userPassword1 === null) {
+    break;
+  } else if (attempts1 === 0) {
+    alert('У вас закончились попытки, аккаунт заблокирован!');
+    break;
+  } else if ( passwords1.includes(userPassword1) ) {
+     alert('Добро пожаловать!');
+     break;
+  } else {
+    alert(`Неверный пароль, у вас осталось ${attempts1} попыток`);
+  }
+} while (true);
