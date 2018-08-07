@@ -18,3 +18,4 @@ const posts = [
     link: 'link-3.com'
   }
 ];
+
