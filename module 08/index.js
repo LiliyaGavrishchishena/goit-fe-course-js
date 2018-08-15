@@ -54,12 +54,12 @@
 'use strict';
 
 const galleryItems = [
-  { preview: '../img/img1_320_213.jpeg', fullview: '../img/img1_1280_853.jpeg', alt: "city ​​at sunset" },
-  { preview: '../img/img2_320_213.jpeg', fullview: '../img/img2_1280_853.jpeg', alt: "crossroads of people and cars" },
-  { preview: '../img/img3_320_213.jpeg', fullview: '../img/img3_1280_853.jpeg', alt: "night city" },
-  { preview: '../img/img4_320_213.jpeg', fullview: '../img/img4_1280_853.jpeg', alt: "skyscrapers from a bird's-eye view" },
-  { preview: '../img/img5_320_213.jpeg', fullview: '../img/img5_1280_853.jpeg', alt: "skyscrapers from the ground" },
-  { preview: '../img/img6_320_213.jpeg', fullview: '../img/img6_1280_853.jpeg', alt: "night city in a fog" },
+  { preview: 'img/img1_320_213.jpeg', fullview: 'img/img1_1280_853.jpeg', alt: "city ​​at sunset" },
+  { preview: 'img/img2_320_213.jpeg', fullview: 'img/img2_1280_853.jpeg', alt: "crossroads of people and cars" },
+  { preview: 'img/img3_320_213.jpeg', fullview: 'img/img3_1280_853.jpeg', alt: "night city" },
+  { preview: 'img/img4_320_213.jpeg', fullview: 'img/img4_1280_853.jpeg', alt: "skyscrapers from a bird's-eye view" },
+  { preview: 'img/img5_320_213.jpeg', fullview: 'img/img5_1280_853.jpeg', alt: "skyscrapers from the ground" },
+  { preview: 'img/img6_320_213.jpeg', fullview: 'img/img6_1280_853.jpeg', alt: "night city in a fog" },
 ];
 
   const gallery = document.querySelector('.js-image-gallery');
