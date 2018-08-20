@@ -1,3 +1,4 @@
+'use strict';
 /*
   Создайте скрипт секундомера.
   По ссылке можно посмотреть пример выбрав Stopwatch http://www.online-stopwatch.com/full-screen-stopwatch/
@@ -58,8 +59,8 @@ const timer = {
   id: null,
   startTime: null,
   deltaTime: 0,
+  pauseTime: 0,
   isActive: false,
-  isActiveReset: false,
 
   start() {
     if (this.isActive) return;
