@@ -1,0 +1,43 @@
+body {
+  background: #381bdd;
+  font-family: Arial, sans-serif;
+}
+
+.stopwatch {
+  width: 800px;
+  margin: 30px auto;
+  color: #fff;
+  text-align: center;
+  background-color: #7b6ccf;
+  padding: 30px;
+  border: solid 1px #fff;
+}
+
+.js-time {
+  font-size: 50px;
+}
+
+button {
+  background: #381bdd;
+  color: #fff;
+  border: solid 1px #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 30px;
+  padding: 30px 20px;
+  width: 200px;
+  margin: 15px;
+}
+
+button:hover {
+  background: #fff;
+  border: solid 1px #fff;
+  color: #381bdd;
+}
+
+.js-laps {
+  color: #fff;
+  list-style: none;
+  font-size: 30px;
+  text-align: center;
+}
