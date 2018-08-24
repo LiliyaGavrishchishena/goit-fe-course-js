@@ -44,92 +44,91 @@
   - Функционал кнопки button.js-take-lap при клике - сохранение текущего времени секундомера
     в массив и добавление в ul.js-laps нового li с сохраненным временем в формате xx:xx.x
 */
-"use strict";
+'use strict';
 
-const timeBoard = document.querySelector('.js-time');
+// const timeBoard = document.querySelector('.js-time');
 
-const startBtn = document.querySelector('.js-start');
-const resetBtn = document.querySelector('.js-reset');
-const lapBtn = document.querySelector('.js-take-lap');
+// const startBtn = document.querySelector('.js-start');
+// const resetBtn = document.querySelector('.js-reset');
+// const lapBtn = document.querySelector('.js-take-lap');
 
-const lapsList = document.querySelector('.js-laps');
+// const lapsList = document.querySelector('.js-laps');
 
-const timer = {
-  id: null,
-  startTime: null,
-  deltaTime: 0,
-  isActive: false,
+// const timer = {
+//   id: null,
+//   startTime: null,
+//   deltaTime: 0,
+//   isActive: false,
 
-  start() {
-    if (this.isActive) return;
+//   start() {
+//     if (this.isActive) return;
 
-    this.isActive = true;
-    this.startTime = Date.now() - this.deltaTime;
+//     this.isActive = true;
+//     this.startTime = Date.now() - this.deltaTime;
 
-    this.id = setInterval(() => {
-      const currentTime = Date.now();
-      this.deltaTime = currentTime - this.startTime;
+//     this.id = setInterval(() => {
+//       const currentTime = Date.now();
+//       this.deltaTime = currentTime - this.startTime;
 
-      updateClockface(this.deltaTime);
-    }, 100);
-  },
+//       updateClockface(this.deltaTime);
+//     }, 100);
+//   },
 
-  stop() {
-    clearInterval(this.id);
-    this.isActive = false;
-  },
+//   stop() {
+//     clearInterval(this.id);
+//     this.isActive = false;
+//   },
 
-  reset() {
-    this.stop();
-    this.deltaTime = 0;
-    updateClockface(this.deltaTime);
-  },
-};
+//   reset() {
+//     this.stop();
+//     this.deltaTime = 0;
+//     updateClockface(this.deltaTime);
+//   },
+// };
 
-startBtn.addEventListener('click', handleStartBtnClick);
-resetBtn.addEventListener('click', handleStopBtnClick);
-lapBtn.addEventListener('click', handleRecordLap);
+// startBtn.addEventListener('click', handleStartBtnClick);
+// resetBtn.addEventListener('click', handleStopBtnClick);
+// lapBtn.addEventListener('click', handleRecordLap);
 
-function handleStartBtnClick() {
-  if (!timer.isActive) {
-    timer.start();
-    this.textContent = 'Pause';
-  } else {
-    timer.stop();
-    this.textContent = 'Continue';
-  }
-}
+// function handleStartBtnClick() {
+//   if (!timer.isActive) {
+//     timer.start();
+//     this.textContent = 'Pause';
+//   } else {
+//     timer.stop();
+//     this.textContent = 'Continue';
+//   }
+// }
 
-function handleStopBtnClick() {
-  timer.reset();
-  startBtn.textContent = 'Start';
-}
+// function handleStopBtnClick() {
+//   timer.reset();
+//   startBtn.textContent = 'Start';
+// }
 
-function updateClockface(time) {
-  const formattedTime = formatTime(time);
-  timeBoard.textContent = formattedTime;
-}
+// function updateClockface(time) {
+//   const formattedTime = formatTime(time);
+//   timeBoard.textContent = formattedTime;
+// }
 
-function formatTime(ms) {
-  const date = new Date(ms);
+// function formatTime(ms) {
+//   const date = new Date(ms);
 
-  let minutes = date.getMinutes();
-  minutes = minutes < 10 ? `0${minutes}` : minutes;
+//   let minutes = date.getMinutes();
+//   minutes = minutes < 10 ? `0${minutes}` : minutes;
 
-  let seconds = date.getSeconds();
-  seconds = seconds < 10 ? `0${seconds}` : seconds;
+//   let seconds = date.getSeconds();
+//   seconds = seconds < 10 ? `0${seconds}` : seconds;
 
-  const mseconds = String(date.getMilliseconds()).slice(0, 1);
+//   const mseconds = String(date.getMilliseconds()).slice(0, 1);
 
-  return `${minutes}:${seconds}.${mseconds}`;
-}
+//   return `${minutes}:${seconds}.${mseconds}`;
+// }
 
-function handleRecordLap (event) {
-  const lap = document.createElement('li');
-  lap.textContent = timeBoard.textContent;
-  lapsList.append(lap);
-}
-
+// function handleRecordLap (event) {
+//   const lap = document.createElement('li');
+//   lap.textContent = timeBoard.textContent;
+//   lapsList.append(lap);
+// }
 
 /*
   ⚠️ ЗАДАНИЕ ПОВЫШЕННОЙ СЛОЖНОСТИ - ВЫПОЛНЯТЬ ПО ЖЕЛАНИЮ
@@ -150,3 +149,12 @@ function handleRecordLap (event) {
 
   Где parent* это существующий DOM-узел.
 */
+
+class Stopwatch {
+  constructor() {
+    this.id = null;
+    this.startTime = startTime;
+    this.deltaTime = deltaTime;
+    this.isActive = false;
+  }
+}
