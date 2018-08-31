@@ -19,3 +19,202 @@
   Сделать минимальный графический интерфейс в виде панели с полями и кнопками.
   А так же панелью для вывода результатов операций с бэкендом.
 */
+
+// GET https://test-users-api.herokuapp.com/users/
+// Show your all created users. No parameters.
+// GET https://test-users-api.herokuapp.com/users/:id
+// Show your only one user by id. No parameters.
+// POST https://test-users-api.herokuapp.com/users/
+// Creating new user. Required parameters: name -> String, age -> Number;
+// PUT https://test-users-api.herokuapp.com/users/:id
+// Editing user by ID, sending in URL. Avialible parameters: name -> String, age -> Number
+// DELETE https://test-users-api.herokuapp.com/users/:id
+// Deleting user by ID, sending in URL. No parameters.
+
+// fetch('https://test-users-api.herokuapp.com/users', {
+//   method: 'POST',
+//   body: JSON.stringify({ name: "NEW", age: 12}),
+//   headers: {
+//     Accept: 'application/json',
+//     'Content-Type': 'application/json',
+//   }
+// });
+
+'use strict';
+
+const api = {
+  baseUrl: 'https://test-users-api.herokuapp.com/users/',
+
+  getAllUsers() {
+    return fetch(this.baseUrl, {
+      method: 'GET',
+    })
+      .then(response => {
+        if (response.ok) return response.json();
+
+        throw new Error(`Error while fetching: ${response.statusText}`);
+      })
+      .catch(error => console.log('ERROR: ', error));
+  },
+
+  getById(id) {
+    return fetch(`${this.baseUrl}${id}`, {
+      method: 'GET',
+    })
+      .then(response => {
+        if (response.ok) return response.json();
+
+        throw new Error(`Error while fetching: ${response.statusText}`);
+      })
+      .catch(error => console.log('ERROR: ', error));
+  },
+
+  addUser(user) {
+    return fetch(this.baseUrl, {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(response => {
+        if (response.ok) return response.json();
+
+        throw new Error(`Error while fetching: ${response.statusText}`);
+      })
+      .catch(error => console.log('ERROR: ', error));
+  },
+
+  deleteUser(id) {
+    return fetch(`${this.baseUrl}${id}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (!response.ok) throw new Error('Неполучилось удалить!!!');
+      })
+      .catch(error => console.log('ERROR: ', error));
+  },
+
+  updateUser(id, user) {
+    return fetch(`${this.baseUrl}${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(user),
+      headers: { 'Content-type': 'application/json' },
+    })
+      .then(response => response.json())
+      .catch(error => console.log('ERROR: ', error));
+  },
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const refs = selectRefs();
+
+  refs.GetAllUsers.addEventListener('submit', handleGetAllUsers);
+
+  function handleGetAllUsers(event) {
+    event.preventDefault();
+
+    api.getAllUsers().then(users => {
+      let data = users.data;
+      const markup = data.reduce(
+        (acc, user) => acc + createUsersMarkup(user),
+        '',
+      );
+
+      refs.reply.innerHTML = markup;
+    });
+  }
+
+  function createUsersMarkup({ id, name, age }) {
+    const item = `<div class="grid-item">
+    ID: ${id}, Name: ${name}, Age: ${age}
+    </div>`;
+    return item;
+  }
+
+  refs.GetById.addEventListener('submit', handleGetById);
+
+  function handleGetById() {
+    event.preventDefault();
+    const input = refs.GetByIdInput;
+
+    api.getById(input.value).then(data => {
+      const markup = createUsersMarkup(data.data);
+
+      refs.reply.innerHTML = markup;
+    });
+    input.value = '';
+  }
+
+  refs.AddUser.addEventListener('submit', handleAddUser);
+
+  function handleAddUser() {
+    event.preventDefault();
+    const userName = refs.AddUserInputName;
+    const userAge = refs.AddUserInputAge;
+    const newUser = {
+      name: userName.value,
+      age: userAge.value,
+    };
+
+    api.addUser(newUser).then(user => {
+      console.log(user);
+    });
+    userName.value = '';
+    userAge.value = '';
+  }
+
+  refs.UpdateUser.addEventListener('submit', handleUpdateUser);
+
+  function handleUpdateUser() {
+    event.preventDefault();
+
+    const item = refs.UpdateUserInput;
+    const nameUpdated = refs.UpdateUserName;
+    const ageUpdated = refs.UpdateUserAge;
+    const userToUpdate = {
+      name: nameUpdated.value,
+      age: ageUpdated.value,
+    };
+
+    api.updateUser(item.value, userToUpdate);
+    item.value = '';
+    nameUpdated.value = '';
+    ageUpdated.value = '';
+  }
+
+  refs.DeleteUser.addEventListener('submit', handleDeleteUser);
+
+  function handleDeleteUser(id) {
+    event.preventDefault();
+    const del = refs.DeleteUserInput;
+
+    api.deleteUser(del.value).then(() => {
+      console.log(`success`);
+    });
+    del.value = '';
+  }
+
+  function selectRefs() {
+    const refs = {};
+
+    refs.reply = document.querySelector('.reply');
+
+    refs.GetAllUsers = document.querySelector('.js-form-get-all');
+
+    refs.GetById = document.querySelector('.js-form-get-id');
+    refs.GetByIdInput = refs.GetById.querySelector('.input-get-id');
+
+    refs.AddUser = document.querySelector('.js-form-add');
+    refs.AddUserInputName = refs.AddUser.querySelector('.input-add-name');
+    refs.AddUserInputAge = refs.AddUser.querySelector('.input-add-age');
+
+    refs.UpdateUser = document.querySelector('.js-form-update');
+    refs.UpdateUserInput = document.querySelector('.input-update-id');
+    refs.UpdateUserName = refs.UpdateUser.querySelector('.input-update-name');
+    refs.UpdateUserAge = refs.UpdateUser.querySelector('.input-update-age');
+
+    refs.DeleteUser = document.querySelector('.js-form-del');
+    refs.DeleteUserInput = document.querySelector('.input-del-id');
+
+    return refs;
+  }
+});

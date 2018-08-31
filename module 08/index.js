@@ -54,121 +54,55 @@
 'use strict';
 
 const galleryItems = [
-  {
-    preview: 'img/img1_320_213.jpeg',
-    fullview: 'img/img1_1280_853.jpeg',
-    alt: 'city ​​at sunset',
-  },
-  {
-    preview: 'img/img2_320_213.jpeg',
-    fullview: 'img/img2_1280_853.jpeg',
-    alt: 'crossroads of people and cars',
-  },
-  {
-    preview: 'img/img3_320_213.jpeg',
-    fullview: 'img/img3_1280_853.jpeg',
-    alt: 'night city',
-  },
-  {
-    preview: 'img/img4_320_213.jpeg',
-    fullview: 'img/img4_1280_853.jpeg',
-    alt: "skyscrapers from a bird's-eye view",
-  },
-  {
-    preview: 'img/img5_320_213.jpeg',
-    fullview: 'img/img5_1280_853.jpeg',
-    alt: 'skyscrapers from the ground',
-  },
-  {
-    preview: 'img/img6_320_213.jpeg',
-    fullview: 'img/img6_1280_853.jpeg',
-    alt: 'night city in a fog',
-  },
+  { preview: '/img/img1_320_213.jpeg', fullview: '/img/img1_1280_853.jpeg', alt: "city at sunset" },
+  { preview: '/img/img2_320_213.jpeg', fullview: '/img/img2_1280_853.jpeg', alt: "crossroads of people and cars" },
+  { preview: '/img/img3_320_213.jpeg', fullview: '/img/img3_1280_853.jpeg', alt: "night city" },
+  { preview: '/img/img4_320_213.jpeg', fullview: '/img/img4_1280_853.jpeg', alt: "skyscrapers from a bird's-eye view" },
+  { preview: '/img/img5_320_213.jpeg', fullview: '/img/img5_1280_853.jpeg', alt: "skyscrapers from the ground" },
+  { preview: '/img/img6_320_213.jpeg', fullview: '/img/img6_1280_853.jpeg', alt: "night city in a fog" },
 ];
 
-//   const gallery = document.querySelector('.js-image-gallery');
+const createGallery = (galleryItems) => {
+  const gallery = document.querySelector('.js-image-gallery');
 
-//   const fullview = document.createElement('div');
-//   fullview.classList.add('fullview');
+  const full = document.createElement('div');
+  full.classList.add('fullview');
 
-//   const fullviewImg = document.createElement('img');
-//   fullviewImg.setAttribute('src', galleryItems[0].fullview);
-//   fullviewImg.setAttribute('alt', galleryItems[0].alt);
+  const full_img = document.createElement('img');
+  full_img.setAttribute('src', galleryItems[0].fullview);
 
-//   const preview = document.createElement('ul');
-//   preview.classList.add('preview');
+  const prev = document.createElement('ul');
+  prev.classList.add('preview');
 
-//   const prevItems = galleryItems.reduce((acc, galleryItem) => acc += createPrevItems(galleryItem), "");
+  const prevItems = createPrevItems (galleryItems);
 
-//   fullview.append(fullviewImg);
-//   preview.insertAdjacentHTML('afterbegin', prevItems);
-//   gallery.append(fullview, preview);
+  full.append(full_img);
+  prev.insertAdjacentHTML('afterbegin', prevItems);
+  gallery.append(full, prev);
+};
 
-// function createPrevItems( {preview, fullview, alt} ) {
-//   return `<li>
-//   <img src=${preview}
-//   data-fullview=${fullview}
-//   alt='${alt}'></li>
-//   `;
-// };
-
-// preview.addEventListener('click', handleOnClick);
-
-// function handleOnClick (event) {
-//   const target = event.target;
-//   const nodeName = target.nodeName;
-//   if (nodeName !== 'IMG') return; {
-//     fullviewImg.setAttribute("src", target.dataset.fullview);
-//   }
-// };
-
-/*
-  ⚠️ ЗАДАНИЕ ПОВЫШЕННОЙ СЛОЖНОСТИ - ВЫПОЛНЯТЬ ПО ЖЕЛАНИЮ
-
-  Создайте плагин галлереи используя ES6 класс. Добавьте поля и методы класса так,
-  чтобы можно было создать любое количество галлерей на странице. Функционал плагина
-  аналогичный заданию выше.
-
-  При создании экземпляра конструктор получает:
-    - items - список элементов для preview
-    - parentNode - ссылку на DOM-узел в который будут помещены fullview и preview
-    - defaultActiveItem - номер активного элемента preview по умолчанию
-
-  Тогда создание экземпляра будет выглядеть следующим образом.
-*/
-
-// new Gallery({
-//   items: galleryItems,
-//   parentNode: document.querySelector('.image-gallery'),
-//   defaultActiveItem: 1
-// });
-
-/* Далее плагин работает в автономном режиме */
-
-class Gallery {
-  constructor({ items, parentNode, defaultActiveItem }) {
-    this.items = items;
-    this.parentNode = parentNode;
-    this.defaultActiveItem = defaultActiveItem;
-    this.fullview = fullview;
-    this.fullviewImg = fullviewImg;
-    this.preview = preview;
-    this.prevItems = prevItems;
-    this.createPrevItems ();
-  }
-
-  createPrevItems () {
+function createPrevItem( {preview, fullview, alt} ) {
     return `<li>
-    <img src=${this.preview}
-    data-fullview=${this.fullview}
-    alt='${this.alt}'></li>`;
+    <img src=${preview}
+    data-fullview=${fullview}
+    alt='${alt}'></li>
+    `;
   };
 
+function createPrevItems (galleryItems) {
+  return galleryItems.reduce((acc, galleryItem) => acc += createPrevItem(galleryItem), "");
+};
 
-}
+createGallery(galleryItems);
 
-new Gallery({
-  items: galleryItems,
-  parentNode: document.querySelector('.image-gallery'),
-  defaultActiveItem: 1,
-});
+const previewList = document.querySelector('.preview');
+previewList.addEventListener('click', handlerFullviewImg);
+
+function handlerFullviewImg(event) {
+  event.preventDefault();
+  const itemClick = event.target;
+  const fullview = document.querySelector('.fullview img')
+
+  if (itemClick.nodeName !== 'IMG') return;
+  fullview.setAttribute('src', itemClick.dataset.fullview);
+};

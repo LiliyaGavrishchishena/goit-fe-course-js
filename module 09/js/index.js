@@ -46,115 +46,86 @@
 */
 'use strict';
 
-// const timeBoard = document.querySelector('.js-time');
+const timeBoard = document.querySelector('.js-time');
 
-// const startBtn = document.querySelector('.js-start');
-// const resetBtn = document.querySelector('.js-reset');
-// const lapBtn = document.querySelector('.js-take-lap');
+const startBtn = document.querySelector('.js-start');
+const resetBtn = document.querySelector('.js-reset');
+const lapBtn = document.querySelector('.js-take-lap');
 
-// const lapsList = document.querySelector('.js-laps');
+const lapsList = document.querySelector('.js-laps');
 
-// const timer = {
-//   id: null,
-//   startTime: null,
-//   deltaTime: 0,
-//   isActive: false,
+const timer = {
+  id: null,
+  startTime: null,
+  deltaTime: 0,
+  isActive: false,
 
-//   start() {
-//     if (this.isActive) return;
+  start() {
+    if (this.isActive) return;
 
-//     this.isActive = true;
-//     this.startTime = Date.now() - this.deltaTime;
+    this.isActive = true;
+    this.startTime = Date.now() - this.deltaTime;
 
-//     this.id = setInterval(() => {
-//       const currentTime = Date.now();
-//       this.deltaTime = currentTime - this.startTime;
+    this.id = setInterval(() => {
+      const currentTime = Date.now();
+      this.deltaTime = currentTime - this.startTime;
 
-//       updateClockface(this.deltaTime);
-//     }, 100);
-//   },
+      updateClockface(this.deltaTime);
+    }, 100);
+  },
 
-//   stop() {
-//     clearInterval(this.id);
-//     this.isActive = false;
-//   },
-
-//   reset() {
-//     this.stop();
-//     this.deltaTime = 0;
-//     updateClockface(this.deltaTime);
-//   },
-// };
-
-// startBtn.addEventListener('click', handleStartBtnClick);
-// resetBtn.addEventListener('click', handleStopBtnClick);
-// lapBtn.addEventListener('click', handleRecordLap);
-
-// function handleStartBtnClick() {
-//   if (!timer.isActive) {
-//     timer.start();
-//     this.textContent = 'Pause';
-//   } else {
-//     timer.stop();
-//     this.textContent = 'Continue';
-//   }
-// }
-
-// function handleStopBtnClick() {
-//   timer.reset();
-//   startBtn.textContent = 'Start';
-// }
-
-// function updateClockface(time) {
-//   const formattedTime = formatTime(time);
-//   timeBoard.textContent = formattedTime;
-// }
-
-// function formatTime(ms) {
-//   const date = new Date(ms);
-
-//   let minutes = date.getMinutes();
-//   minutes = minutes < 10 ? `0${minutes}` : minutes;
-
-//   let seconds = date.getSeconds();
-//   seconds = seconds < 10 ? `0${seconds}` : seconds;
-
-//   const mseconds = String(date.getMilliseconds()).slice(0, 1);
-
-//   return `${minutes}:${seconds}.${mseconds}`;
-// }
-
-// function handleRecordLap (event) {
-//   const lap = document.createElement('li');
-//   lap.textContent = timeBoard.textContent;
-//   lapsList.append(lap);
-// }
-
-/*
-  ⚠️ ЗАДАНИЕ ПОВЫШЕННОЙ СЛОЖНОСТИ - ВЫПОЛНЯТЬ ПО ЖЕЛАНИЮ
-
-  Выполните домашнее задание используя класс с полями и методами.
-
-  На вход класс Stopwatch принимает только ссылку на DOM-узел в котором будет
-  динамически создана вся разметка для секундомера.
-
-  Должна быть возможность создать сколько угодно экземпляров секундоментов
-  на странице и все они будут работать независимо.
-
-  К примеру:
-
-  new Stopwatch(parentA);
-  new Stopwatch(parentB);
-  new Stopwatch(parentC);
-
-  Где parent* это существующий DOM-узел.
-*/
-
-class Stopwatch {
-  constructor() {
-    this.id = null;
-    this.startTime = startTime;
-    this.deltaTime = deltaTime;
+  stop() {
+    clearInterval(this.id);
     this.isActive = false;
+  },
+
+  reset() {
+    this.stop();
+    this.deltaTime = 0;
+    updateClockface(this.deltaTime);
+  },
+};
+
+startBtn.addEventListener('click', handleStartBtnClick);
+resetBtn.addEventListener('click', handleStopBtnClick);
+lapBtn.addEventListener('click', handleRecordLap);
+
+function handleStartBtnClick() {
+  if (!timer.isActive) {
+    timer.start();
+    this.textContent = 'Pause';
+  } else {
+    timer.stop();
+    this.textContent = 'Continue';
   }
+}
+
+function handleStopBtnClick() {
+  timer.reset();
+  startBtn.textContent = 'Start';
+}
+
+function updateClockface(time) {
+  const formattedTime = formatTime(time);
+  timeBoard.textContent = formattedTime;
+}
+
+function formatTime(ms) {
+  const date = new Date(ms);
+
+  let minutes = date.getMinutes();
+  minutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  let seconds = date.getSeconds();
+  seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  const mseconds = String(date.getMilliseconds()).slice(0, 1);
+
+  return `${minutes}:${seconds}.${mseconds}`;
+}
+
+function handleRecordLap(event) {
+  const lap = document.createElement('li');
+  lap.textContent = timeBoard.textContent;
+  lapsList.append(lap);
 }

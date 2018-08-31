@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,51 @@
   <title>Module 10</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
 
+<body>
+  <div class="container">
+
+    <section class="request">
+
+      <form class="form js-form-get-all">
+        <h2 class="title">Get All Users</h2>
+        <button class="btn btn-get-all" type="submit">Show All</button>
+      </form>
+
+      <form class="form js-form-get-id">
+        <h2 class="title">Get User by ID</h2>
+        <input class="form-input input-get-id" type="text" placeholder="ID">
+        <button class="btn btn-get-id" type="submit">Show by ID</button>
+      </form>
+
+      <form class="form js-form-add">
+        <h2 class="title">Add User</h2>
+        <input class="form-input input-add-name" type="text" placeholder="Name">
+        <input class="form-input input-add-age" type="text" placeholder="Age">
+        <button class="btn btn-add" type="submit">Create</button>
+      </form>
+
+      <form class="form js-form-update">
+        <h2 class="title">Update User</h2>
+        <input class="form-input input-update-id" type="text" placeholder="ID">
+        <input class="form-input input-update-name" type="text" placeholder="Name">
+        <input class="form-input input-update-age" type="text" placeholder="Age">
+        <button class="btn btn-update" type="submit">Update</button>
+      </form>
+
+      <form class="form js-form-del">
+        <h2 class="title">Remove User</h2>
+        <input class="form-input input-del-id" type="text" placeholder="ID">
+        <button class="btn btn-del" type="submit">Delete</button>
+      </form>
+
+    </section>
+
+    <section class="reply">
+
+    </section>
+  </div>
   <script src="/js/index.js"></script>
 </body>
+
 </html>
