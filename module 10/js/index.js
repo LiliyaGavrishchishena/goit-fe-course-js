@@ -45,19 +45,7 @@
 const api = {
   baseUrl: 'https://test-users-api.herokuapp.com/users/',
 
-  getAllUsers() {
-    return fetch(this.baseUrl, {
-      method: 'GET',
-    })
-      .then(response => {
-        if (response.ok) return response.json();
-
-        throw new Error(`Error while fetching: ${response.statusText}`);
-      })
-      .catch(error => console.log('ERROR: ', error));
-  },
-
-  getById(id) {
+  getUsers(id = "") {
     return fetch(`${this.baseUrl}${id}`, {
       method: 'GET',
     })
@@ -88,7 +76,7 @@ const api = {
       method: 'DELETE',
     })
       .then(response => {
-        if (!response.ok) throw new Error('Неполучилось удалить!!!');
+        if (!response.ok) throw new Error('It can not be removed');
       })
       .catch(error => console.log('ERROR: ', error));
   },
@@ -108,11 +96,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const refs = selectRefs();
 
   refs.GetAllUsers.addEventListener('submit', handleGetAllUsers);
+  refs.GetById.addEventListener('submit', handleGetById);
+  refs.AddUser.addEventListener('submit', handleAddUser);
+  refs.UpdateUser.addEventListener('submit', handleUpdateUser);
+  refs.DeleteUser.addEventListener('submit', handleDeleteUser);
 
   function handleGetAllUsers(event) {
     event.preventDefault();
 
-    api.getAllUsers().then(users => {
+    api.getUsers().then(users => {
       let data = users.data;
       const markup = data.reduce(
         (acc, user) => acc + createUsersMarkup(user),
@@ -123,20 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function createUsersMarkup({ id, name, age }) {
-    const item = `<div class="grid-item">
-    ID: ${id}, Name: ${name}, Age: ${age}
-    </div>`;
-    return item;
-  }
-
-  refs.GetById.addEventListener('submit', handleGetById);
-
-  function handleGetById() {
+  function handleGetById(event) {
     event.preventDefault();
     const input = refs.GetByIdInput;
 
-    api.getById(input.value).then(data => {
+    api.getUsers(input.value).then(data => {
       const markup = createUsersMarkup(data.data);
 
       refs.reply.innerHTML = markup;
@@ -144,9 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     input.value = '';
   }
 
-  refs.AddUser.addEventListener('submit', handleAddUser);
-
-  function handleAddUser() {
+  function handleAddUser(event) {
     event.preventDefault();
     const userName = refs.AddUserInputName;
     const userAge = refs.AddUserInputAge;
@@ -162,9 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     userAge.value = '';
   }
 
-  refs.UpdateUser.addEventListener('submit', handleUpdateUser);
-
-  function handleUpdateUser() {
+  function handleUpdateUser(event) {
     event.preventDefault();
 
     const item = refs.UpdateUserInput;
@@ -181,9 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ageUpdated.value = '';
   }
 
-  refs.DeleteUser.addEventListener('submit', handleDeleteUser);
-
-  function handleDeleteUser(id) {
+  function handleDeleteUser(event) {
     event.preventDefault();
     const del = refs.DeleteUserInput;
 
@@ -191,6 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(`success`);
     });
     del.value = '';
+  }
+
+  function createUsersMarkup({ id, name, age }) {
+    const item = `<div class="grid-item">
+    ID: ${id}, Name: ${name}, Age: ${age}
+    </div>`;
+    return item;
   }
 
   function selectRefs() {
