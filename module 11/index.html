@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Module 11</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <form class="form js-form">
+    </form>
+    <ul class="grid-list"></ul>
+  </div>
+
+  <template id="template-form">
+      <section>
+        <h2>Screen size</h2>
+        <ul class="form-list">
+          {{#each size}}
+          <li>
+            <label><input type="checkbox" name="size" value="{{this}}">{{this}}"</label>
+          </li>
+          {{/each}}
+        </ul>
+      </section>
+      <section>
+        <h2>Color</h2>
+        <ul class="form-list">
+          {{#each color}}
+          <li>
+            <label><input type="checkbox" name="color" value="{{this}}">{{this}}</label>
+          </li>
+          {{/each}}
+        </ul>
+      </section>
+      <section>
+        <h2>Release date</h2>
+        <ul class="form-list">
+          {{#each release_date}}
+          <li>
+            <label><input type="checkbox" name="release_date" value="{{this}}">{{this}}</label>
+          </li>
+          {{/each}}
+        </ul>
+      </section>
+      <button type="submit">Filter</button>
+      <button type="reset">Clear</button>
+  </template>
+
+
+  <template id="template-card">
+    <li class="card">
+      <img src="{{img}}" alt="{{name}}">
+      <p class="name">{{name}}</p>
+      <p class="size">Size: {{size}}</p>
+      <p class="color">Color: {{color}}</p>
+      <p class="release_date">Release date: {{release_date}}</p>
+      <p class="price">Price: {{price}}</p>
+      <p class="descr">{{descr}}</p>
+    </li>
+  </template>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>

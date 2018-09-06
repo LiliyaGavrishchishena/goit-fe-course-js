@@ -1,0 +1,80 @@
+html {
+  box-sizing: border-box;
+}
+
+,
+::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #e4e5e7;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+.container {
+  display: flex;
+  text-align: left;
+  border-radius: 4px;
+  line-height: 14px;
+  margin: 0 0 5px;
+  background: #e4e5e7;
+  font-size: 13px;
+  font-family: "Montserrat";
+  color: rgb(52, 62, 92);
+}
+
+.form {
+  padding: 20px;
+  width: 15%;
+}
+
+.form-list {
+  list-style: none;
+}
+
+button {
+  text-transform: uppercase;
+  border-radius: 2px;
+  outline: 0;
+  background: #00e2aa;
+  border: 0;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: #ffffff;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+  background: #ffffff;
+  color: #00e2aa;
+}
+
+.grid-list {
+  width: 85%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  color: #1c1e23;
+  list-style: none;
+  margin: 0;
+}
+
+.card {
+  padding: 10px;
+  background: #ffffff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.card:not(:last-child) {
+  margin-right: 10px;
+}
+
+.name,
+.price {
+  font-weight: bold;
+}
