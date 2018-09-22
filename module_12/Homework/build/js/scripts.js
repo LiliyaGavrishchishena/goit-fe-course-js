@@ -164,7 +164,7 @@ function handleFormSubmit(event) {
 }
 
 function getUrlInfo(url) {
-  return fetch('http://api.linkpreview.net/?key=' + API_KEY + '&q=' + url).then(function (response) {
+  return fetch('https://api.linkpreview.net/?key=' + API_KEY + '&q=' + url).then(function (response) {
     if (response.ok) return response.json();
 
     throw new Error('Error while fetching: ' + response.statusText);

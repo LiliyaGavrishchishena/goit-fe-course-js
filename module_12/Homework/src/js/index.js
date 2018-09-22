@@ -163,7 +163,7 @@ function handleFormSubmit(event) {
 }
 
 function getUrlInfo(url) {
-  return fetch(`http://api.linkpreview.net/?key=${API_KEY}&q=${url}`)
+  return fetch(`https://api.linkpreview.net/?key=${API_KEY}&q=${url}`)
     .then(response => {
       if (response.ok) return response.json();
 
