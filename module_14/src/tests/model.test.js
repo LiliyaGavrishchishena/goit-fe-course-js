@@ -9,13 +9,6 @@ describe('Model', () => {
     expect(model._urlInfo).toEqual([]);
   });
 
-  it('Should add urlInfo to arr', () => {
-    const model = new Model();
-    const url = "google.com";
-
-    model.setUrl(url);
-  });
-
   it('Should remove item from arr', () => {
     const model = new Model();
     const arr = model._urlInfo;

@@ -43,6 +43,5 @@ export default class Controller {
 
     this._view.deleteUrl(itemId);
     this._model.removeUrl(itemId);
-    console.log(this._model._urlInfo);
   }
 }
