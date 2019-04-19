@@ -2,6 +2,10 @@ body {
   font-family: Arial, sans-serif;
   background-color: #008080;
   font-size: 1.7rem;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
@@ -12,8 +16,6 @@ body {
 .stopwatch {
   background: url('../img/plank.png') no-repeat center center;
   background-size: cover;
-  width: 80%;
-  margin: 30px auto;
   display: flex;
   flex-direction: column;
   color: #008080;
@@ -21,6 +23,9 @@ body {
   padding: 50px;
 }
 
+.time {
+  font-size: 1.9rem;
+}
 .btns {
   display: flex;
   justify-content: space-around;
@@ -29,7 +34,7 @@ body {
 .btn {
   background: rgb(0, 128, 128, 0.4);
   color: #fff;
-  border: solid 2px #fff;
+  border: solid 1px #fff;
   text-decoration: none;
   cursor: pointer;
   padding: 30px 20px;
@@ -47,4 +52,6 @@ button:hover {
   color: #fff;
   list-style: none;
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
