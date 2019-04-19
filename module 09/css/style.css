@@ -1,43 +1,50 @@
 body {
-  background: #381bdd;
   font-family: Arial, sans-serif;
+  background-color: #008080;
+  font-size: 1.7rem;
+}
+
+.title {
+  color: #008080;
+  text-align: center;
 }
 
 .stopwatch {
-  width: 800px;
+  background: url('../img/plank.png') no-repeat center center;
+  background-size: cover;
+  width: 80%;
   margin: 30px auto;
-  color: #fff;
+  display: flex;
+  flex-direction: column;
+  color: #008080;
   text-align: center;
-  background-color: #7b6ccf;
-  padding: 30px;
-  border: solid 1px #fff;
+  padding: 50px;
 }
 
-.js-time {
-  font-size: 50px;
+.btns {
+  display: flex;
+  justify-content: space-around;
 }
 
-button {
-  background: #381bdd;
+.btn {
+  background: rgb(0, 128, 128, 0.4);
   color: #fff;
-  border: solid 1px #fff;
+  border: solid 2px #fff;
   text-decoration: none;
   cursor: pointer;
-  font-size: 30px;
   padding: 30px 20px;
-  width: 200px;
-  margin: 15px;
+  width: 30%;
+  outline: none;
 }
 
 button:hover {
   background: #fff;
   border: solid 1px #fff;
-  color: #381bdd;
+  color: #008080;
 }
 
 .js-laps {
   color: #fff;
   list-style: none;
-  font-size: 30px;
   text-align: center;
 }
